@@ -49,12 +49,32 @@ const comentarioServices = {
   },
 
   comentarioLike: async (post_id, usuario_id, comentario_id, tipo) => {
-    const post = await Post.findByPk(post_id);
-    const comentario = await Comentario.findOne({ where: { post_id } });
+    const comentario = await Comentario.findByPk(comentario_id);
     const usuario = await Usuario.findByPk(usuario_id);
 
-    if (usuario && comentario && post) {
-      const like = await likeService.comentarioLike(usuario_id, post_id, comentario_id, tipo);
+    if (usuario && comentario) {
+      const like = await likeService.comentarioLike(
+        usuario_id,
+        post_id,
+        comentario_id,
+        tipo
+      );
+      return like;
+    } else {
+      return null;
+    }
+  },
+
+  getComentarioLike: async (usuario_id, comentario_id, tipo) => {
+    const comentario = await Comentario.findByPk(comentario_id);
+    console.log(comentario);
+
+    if (comentario) {
+      const like = await likeService.getComentarioLike(
+        usuario_id,
+        comentario_id,
+        tipo
+      );
       return like;
     } else {
       return null;

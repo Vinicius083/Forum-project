@@ -97,7 +97,6 @@ export const curtirPost = async (id, usuario_id, tipo) => {
         },
       }
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Erro ao curtir post");

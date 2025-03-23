@@ -78,6 +78,29 @@ const comentarioController = {
     }
   },
 
+  getComentarioLike: async (req, res) => {
+    const { id } = req.params;
+    const { usuario_id, tipo } = req.query;
+
+    try {
+      const like = await comentarioServices.getComentarioLike(
+        usuario_id,
+        id,
+        tipo
+      );
+      console.log("LIKE:", like);
+      if (like) {
+        res.status(200).json({ message: "Like" });
+      } else {
+        res.status(200).json({ message: "Sem like" });
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: "Falha ao pegar like", error: error.message });
+    }
+  },
+
   deletarComentario: async (req, res) => {
     try {
       const deletado = await comentarioServices.deletarComentario(

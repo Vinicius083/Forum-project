@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Avatar } from "@mui/material";
-import BotaoLike from "@/components/post/Like";
-import DeleteButton from "./post/DeleteButton";
+import DeleteButton from "../post/DeleteButton";
+import BotaoLikeComentario from "./LikeComentario";
 
 const Comentarios = ({ comentarios, setComentarios }) => {
   const [usuario, setUsuario] = useState(null);
@@ -61,17 +61,13 @@ const Comentarios = ({ comentarios, setComentarios }) => {
             {comentario.conteudo}
           </Typography>
 
-          <Box display="flex" alignItems="center" mt={1}>
-            <BotaoLike
-              post_id={comentario.post_id}
-              usuario_id={usuario?.id}
-              comentario_id={comentario.id}
-              tipo="comentário"
-            />
-            <Typography variant="body2" ml={1}>
-              {comentario.qtd_curtidas}
-            </Typography>
-          </Box>
+          <BotaoLikeComentario
+            post_id={comentario.post_id}
+            usuario_id={usuario?.id}
+            comentario_id={comentario.id}
+            qtdCurtidas={comentario.qtd_curtidas}
+            tipo="comentário"
+          />
         </Box>
       ))}
     </Box>

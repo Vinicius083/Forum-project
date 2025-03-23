@@ -43,6 +43,10 @@ export default (sequelize) => {
       foreignKey: "usuario_id",
       as: "usuario",
     });
+    Comentario.hasMany(models.Like, {
+      foreignKey: "comentario_id",
+      as: "likes",
+    });
   };
 
   return Comentario;

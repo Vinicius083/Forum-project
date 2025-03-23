@@ -24,6 +24,11 @@ const router = express.Router();
  */
 router.get("/:post_id/comentarios", comentarioController.getComentarios);
 
+router.get(
+  "/:post_id/comentarios/:id/like",
+  comentarioController.getComentarioLike
+);
+
 /**
  * @swagger
  * /posts/{post_id}/comentarios:
@@ -93,7 +98,10 @@ router.post("/:post_id/comentarios", comentarioController.criarComentario);
  *       404:
  *         description: Comentário não encontrado
  */
-router.post("/:post_id/comentarios/:id/like", comentarioController.comentarioLike);
+router.post(
+  "/:post_id/comentarios/:id/like",
+  comentarioController.comentarioLike
+);
 
 /**
  * @swagger
@@ -120,6 +128,9 @@ router.post("/:post_id/comentarios/:id/like", comentarioController.comentarioLik
  *       404:
  *         description: Comentário não encontrado
  */
-router.delete("/:post_id/comentarios/:id", comentarioController.deletarComentario);
+router.delete(
+  "/:post_id/comentarios/:id",
+  comentarioController.deletarComentario
+);
 
 export default router;

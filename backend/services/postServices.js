@@ -19,7 +19,6 @@ const postService = {
       });
       return posts;
     } catch (error) {
-      console.log(error);
       return { erro: "Erro ao buscar posts" };
     }
   },
@@ -74,14 +73,12 @@ const postService = {
         return { erro: "Usuário não encontrado" };
       }
     } catch (error) {
-      console.log(error);
       return { erro: "Erro ao criar post" };
     }
   },
 
   atualizarPost: async (id, postData) => {
     const [post] = await Post.update(postData, { where: { id } });
-    console.log(post);
     if (post) {
       return await Post.findByPk(id);
     } else {
@@ -101,11 +98,10 @@ const postService = {
     }
   },
 
-  getLike: async (id, usuario_id, tipo) => {
+  getPostLike: async (id, usuario_id, tipo) => {
     const post = await Post.findByPk(id);
     if (post) {
-      const like = await likeService.getLike(id, usuario_id, tipo);
-      console.log("like:", like);
+      const like = await likeService.getPostLike(id, usuario_id, tipo);
       return like;
     } else {
       return null;

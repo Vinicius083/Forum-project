@@ -89,12 +89,12 @@ const postController = {
     }
   },
 
-  getLike: async (req, res) => {
+  getPostLike: async (req, res) => {
     const { id } = req.params;
     const { usuario_id, tipo } = req.query;
 
     try {
-      const like = await postService.getLike(id, usuario_id, tipo);
+      const like = await postService.getPostLike(id, usuario_id, tipo);
       if (like) {
         res.status(200).json({ message: "Like" });
       } else {

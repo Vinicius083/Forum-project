@@ -21,8 +21,6 @@ const DeleteButton = ({
 }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
-
-  console.log(post_id, comentario_id);
   const handleClickOpen = () => {
     setOpen(true);
   };

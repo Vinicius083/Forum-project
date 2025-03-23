@@ -5,8 +5,8 @@ import { useParams } from "next/navigation";
 import { buscarPostPorId } from "@/services/postServices";
 import { getComentarios, criarComentario } from "@/services/comentarioServices";
 import PostDetail from "@/components/post/PostDetail";
-import ComentarioForm from "@/components/ComentarioForm";
-import Comentarios from "@/components/Comentarios";
+import ComentarioForm from "@/components/comentario/ComentarioForm";
+import Comentarios from "@/components/comentario/Comentarios";
 import Navbar from "@/components/Navbar";
 import "@/styles/style.css";
 

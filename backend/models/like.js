@@ -12,6 +12,10 @@ const Like = (sequelize) => {
         },
         allowNull: false,
       },
+      comentario_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
       usuario_id: {
         type: DataTypes.INTEGER,
         references: {
@@ -39,6 +43,10 @@ const Like = (sequelize) => {
     Like.belongsTo(models.Usuario, {
       foreignKey: "usuario_id",
       as: "usuario",
+    });
+    Like.belongsTo(models.Comentario, {
+      foreignKey: "comentario_id",
+      as: "comentario",
     });
   };
 

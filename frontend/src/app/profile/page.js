@@ -35,7 +35,6 @@ const Profile = () => {
   }, [usuario]);
 
   if (!usuario) return <div>Carregando...</div>;
-   console.log(posts)
   return (
     <div className="generalProfile">
       <Navbar

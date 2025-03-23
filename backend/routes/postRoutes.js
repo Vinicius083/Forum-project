@@ -179,7 +179,7 @@ router.post("/:id/like", postController.postLike);
  *       404:
  *         description: Post não encontrado
  */
-router.get("/:id/like", postController.getLike)
+router.get("/:id/like", postController.getPostLike)
 
 /**
  * @swagger

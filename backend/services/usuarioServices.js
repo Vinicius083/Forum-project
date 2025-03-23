@@ -85,7 +85,6 @@ const usuarioService = {
       });
       return posts;
     } catch (error) {
-      console.log(error);
       return { erro: "Erro ao buscar posts do usuário" };
     }
   },

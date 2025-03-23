@@ -16,7 +16,6 @@ export default function BotaoLike({ post_id, usuario_id, qtdCurtidas, tipo }) {
       if (!usuario_id) return;
       try {
         const resposta = await verificaLikePost(post_id, usuario_id, tipo);
-        console.log(resposta.message);
         setPostCurtido(resposta.message === "Like");
       } catch (error) {
         console.error("Erro ao verificar curtida:", error);

@@ -35,34 +35,43 @@ const likeService = {
     }
 
     const existeLike = await Like.findOne({
-      where: { usuario_id, post_id, tipo }, 
+      where: { usuario_id, post_id, comentario_id: comentario_id, tipo },
     });
-
-    console.log(existeLike)
 
     if (existeLike) {
       await existeLike.destroy();
 
       await Comentario.increment(
         { qtd_curtidas: -1 },
-        { where: { post_id: post_id } }
+        { where: { id: comentario_id } }
       );
 
       return { message: "Like removido." };
     } else {
-      await Like.create({ usuario_id, post_id, tipo });
+      await Like.create({ usuario_id, post_id, comentario_id, tipo });
 
       await Comentario.increment(
         { qtd_curtidas: 1 },
-        { where: { post_id: post_id } }
+        { where: { id: comentario_id } }
       );
       return { message: "Like adicionado." };
     }
   },
 
-  getLike: async (post_id, usuario_id, tipo) => {
+  getPostLike: async (post_id, usuario_id, tipo) => {
     const existeLike = await Like.findOne({
       where: { usuario_id, post_id, tipo },
+    });
+    if (existeLike) {
+      return existeLike;
+    } else {
+      return null;
+    }
+  },
+
+  getComentarioLike: async (usuario_id, comentario_id, tipo) => {
+    const existeLike = await Like.findOne({
+      where: { comentario_id, usuario_id, tipo },
     });
     if (existeLike) {
       return existeLike;

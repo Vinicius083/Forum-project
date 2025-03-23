@@ -44,7 +44,6 @@ const usuarioController = {
         const token = jwt.sign({ id: usuario.id }, jwtSecret, {
           expiresIn: "1h",
         });
-        console.log(token);
         res.status(200).json({ token, usuario });
       } else {
         res.status(401).json({ message: "Senha incorreta" });
