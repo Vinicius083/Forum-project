@@ -1,79 +1,53 @@
-import request from "supertest";
-import app from "../server.js";
+import request from 'supertest';
+import app from '../server.js';
 
-describe("Testes das rotas de usuário", () => {
+describe('Testes das rotas de usuário', () => {
   let token;
 
   beforeAll(async () => {
-    // Cria um usuário para autenticação
-    await request(app)
-      .post("/usuarios")
-      .send({
-        nome: "Teste",
-        email: "teste@example.com",
-        senha: "Senha@123",
-        apelido: "teste",
-        profissao: "Desenvolvedor",
-      });
-
-    // Faz login para obter o token JWT
     const response = await request(app)
-      .post("/usuarios/login")
-      .send({
-        email: "teste@example.com",
-        senha: "Senha@123",
-      });
-
+      .post('/login')
+      .send({ email: 'teste@example.com', senha: 'senha123' });
     token = response.body.token;
   });
 
   afterAll(async () => {
-    // Deleta o usuário de teste
-    await request(app)
-      .delete("/usuarios/1")
-      .set("Authorization", `Bearer ${token}`);
+    await new Promise(resolve => setTimeout(() => resolve(), 500)); // Espera para garantir que o servidor seja fechado corretamente
+    app.close(); // Fecha o servidor após os testes
   });
 
-  test("Deve criar um novo usuário", async () => {
+  it('Deve criar um novo usuário', async () => {
     const response = await request(app)
-      .post("/usuarios")
-      .send({
-        nome: "Novo Usuário",
-        email: "novo@example.com",
-        senha: "Senha@123",
-        apelido: "novo",
-        profissao: "Desenvolvedor",
-      });
+      .post('/usuarios')
+      .send({ nome: 'Novo Usuário', email: 'novo@example.com', senha: 'senha123', apelido: 'novo', profissao: 'Desenvolvedor' });
 
     expect(response.statusCode).toBe(201);
-    expect(response.body).toHaveProperty("id");
+    expect(response.body).toHaveProperty('id');
   });
 
-  test("Deve obter um usuário pelo ID", async () => {
+  it('Deve obter um usuário pelo ID', async () => {
     const response = await request(app)
-      .get("/usuarios/1")
-      .set("Authorization", `Bearer ${token}`);
+      .get('/usuarios/1')
+      .set('Authorization', `Bearer ${token}`);
 
     expect(response.statusCode).toBe(200);
-    expect(response.body).toHaveProperty("id");
+    expect(response.body).toHaveProperty('id');
   });
 
-  test("Deve atualizar um usuário pelo ID", async () => {
+  it('Deve atualizar um usuário pelo ID', async () => {
     const response = await request(app)
-      .put("/usuarios/1")
-      .set("Authorization", `Bearer ${token}`)
-      .send({
-        nome: "Usuário Atualizado",
-      });
+      .put('/usuarios/1')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ nome: 'Usuário Atualizado' });
 
     expect(response.statusCode).toBe(200);
-    expect(response.body.nome).toBe("Usuário Atualizado");
+    expect(response.body.nome).toBe('Usuário Atualizado');
   });
 
-  test("Deve deletar um usuário pelo ID", async () => {
+  it('Deve deletar um usuário pelo ID', async () => {
     const response = await request(app)
-      .delete("/usuarios/1")
-      .set("Authorization", `Bearer ${token}`);
+      .delete('/usuarios/1')
+      .set('Authorization', `Bearer ${token}`);
 
     expect(response.statusCode).toBe(200);
   });

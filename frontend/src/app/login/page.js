@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Alert, Snackbar } from "@mui/material";
 import { logarUsuario } from "@/services/usuarioServices";
 import "@/styles/style.css";
-import "@/styles/login.css";
+import "@/styles/loginRegister.css";
 import "boxicons";
 
 export default function Login() {
@@ -13,6 +13,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [nomeUser, setNomeUser] = useState("");
+  const [mostraSenha, setMostraSenha] = useState(false);
   const [notification, setNotification] = useState({
     open: false,
     message: "",
@@ -47,7 +48,7 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="body">
       <Snackbar
         open={notification.open}
         autoHideDuration={3000}
@@ -97,17 +98,19 @@ export default function Login() {
           </div>
           <div className="input_box">
             <input
-              type="password"
+              type={mostraSenha ? "text" : "password"}
               placeholder="Senha"
               required
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
             ></input>
             <box-icon
-              name="lock-alt"
+              name={mostraSenha ? "lock-open-alt" : "lock-alt"}
               type="solid"
               color="#ffffff"
               className="ii"
+              style={{ cursor: "pointer" }}
+              onClick={() => setMostraSenha(!mostraSenha)}
             ></box-icon>
           </div>
 

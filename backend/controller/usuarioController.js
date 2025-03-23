@@ -2,7 +2,7 @@ import usuarioService from "../services/usuarioServices.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-const jwtSecret = "seilaqwertyui";
+const jwtSecret = "jeff_e_massa";
 
 const usuarioController = {
   criarUsuario: async (req, res) => {
@@ -44,12 +44,15 @@ const usuarioController = {
         const token = jwt.sign({ id: usuario.id }, jwtSecret, {
           expiresIn: "1h",
         });
+        console.log(token);
         res.status(200).json({ token, usuario });
       } else {
         res.status(401).json({ message: "Senha incorreta" });
       }
     } catch (error) {
-      res.status(500).json({ message: "Falha ao logar", error: error.message });
+      return res
+        .status(500)
+        .json({ message: "Falha ao logar", error: error.message });
     }
   },
 

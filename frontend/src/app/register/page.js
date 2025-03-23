@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Alert, Snackbar } from "@mui/material";
 import { cadastrarUsuario } from "@/services/usuarioServices";
 import "@/styles/style.css";
-import "@/styles/register.css";
+import "@/styles/loginRegister.css";
 import "boxicons";
 
 export default function RegisterPage() {
@@ -13,6 +13,8 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [mostraSenha, setMostraSenha] = useState(false);
+  const [mostraConfirmarSenha, setMostraConfirmarSenha] = useState(false);
   const [apelido, setApelido] = useState("");
   const [profissao, setProfissao] = useState("");
   const [notificacao, setNotificacao] = useState({
@@ -74,120 +76,126 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="wrapperRegister">
-      <Snackbar
-        open={notificacao.open}
-        autoHideDuration={3000}
-        onClose={handleFecharNotificacao}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      >
-        <Alert
+    <div className="body">
+      <div className="wrapperRegister">
+        <Snackbar
+          open={notificacao.open}
+          autoHideDuration={3000}
           onClose={handleFecharNotificacao}
-          severity={notificacao.severity}
-          variant="filled"
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >
-          {notificacao.message}
-        </Alert>
-      </Snackbar>
+          <Alert
+            onClose={handleFecharNotificacao}
+            severity={notificacao.severity}
+            variant="filled"
+          >
+            {notificacao.message}
+          </Alert>
+        </Snackbar>
 
-      <form>
-        <h1>Cadastre-se</h1>
+        <form>
+          <h1>Cadastre-se</h1>
 
-        <div className="input_box">
-          <input
-            type="text"
-            placeholder="Nome"
-            required
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-          ></input>
-          <box-icon name="user-pin" color="#ffffff" className="i"></box-icon>
+          <div className="input_box">
+            <input
+              type="text"
+              placeholder="Nome"
+              required
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+            ></input>
+            <box-icon name="user-pin" color="#ffffff" className="i"></box-icon>
 
-          <input
-            type="text"
-            placeholder="Usuario"
-            required
-            value={apelido}
-            onChange={(e) => setApelido(e.target.value)}
-          ></input>
-          <box-icon
-            name="user"
-            type="solid"
-            color="#ffffff"
-            className="ii"
-          ></box-icon>
-        </div>
+            <input
+              type="text"
+              placeholder="Usuario"
+              required
+              value={apelido}
+              onChange={(e) => setApelido(e.target.value)}
+            ></input>
+            <box-icon
+              name="user"
+              type="solid"
+              color="#ffffff"
+              className="ii"
+            ></box-icon>
+          </div>
 
-        <div className="input_box">
-          <input
-            type="email"
-            placeholder="Email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>
-          <box-icon
-            name="envelope"
-            type="solid"
-            color="#ffffff"
-            className="i"
-          ></box-icon>
+          <div className="input_box">
+            <input
+              type="email"
+              placeholder="Email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></input>
+            <box-icon
+              name="envelope"
+              type="solid"
+              color="#ffffff"
+              className="i"
+            ></box-icon>
 
-          <input
-            type="text"
-            placeholder="Profissão"
-            required
-            value={profissao}
-            onChange={(e) => setProfissao(e.target.value)}
-          ></input>
-          <box-icon
-            type="solid"
-            name="briefcase-alt"
-            color="#ffffff"
-            className="ii"
-          ></box-icon>
-        </div>
+            <input
+              type="text"
+              placeholder="Profissão"
+              required
+              value={profissao}
+              onChange={(e) => setProfissao(e.target.value)}
+            ></input>
+            <box-icon
+              type="solid"
+              name="briefcase-alt"
+              color="#ffffff"
+              className="ii"
+            ></box-icon>
+          </div>
 
-        <div className="input_box">
-          <input
-            type="password"
-            placeholder="Senha"
-            required
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-          ></input>
-          <box-icon
-            name="lock-alt"
-            type="solid"
-            color="#ffffff"
-            className="i"
-          ></box-icon>
+          <div className="input_box">
+            <input
+              type={mostraSenha ? "text" : "password"}
+              placeholder="Senha"
+              required
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+            ></input>
+            <box-icon
+              name={mostraSenha ? "lock-open-alt" : "lock-alt"}
+              type="solid"
+              color="#ffffff"
+              className="i"
+              style={{ cursor: "pointer" }}
+              onClick={() => setMostraSenha(!mostraSenha)}
+            ></box-icon>
 
-          <input
-            type="password"
-            placeholder="Confirmar senha"
-            required
-            value={confirmarSenha}
-            onChange={(e) => setConfirmarSenha(e.target.value)}
-          ></input>
-          <box-icon
-            name="lock-alt"
-            type="solid"
-            color="#ffffff"
-            className="ii"
-          ></box-icon>
-        </div>
+            <input
+              type={mostraConfirmarSenha ? "text" : "password"}
+              placeholder="Confirmar senha"
+              required
+              value={confirmarSenha}
+              onChange={(e) => setConfirmarSenha(e.target.value)}
+            ></input>
+            <box-icon
+              name={mostraConfirmarSenha ? "lock-open-alt" : "lock-alt"}
+              type="solid"
+              color="#ffffff"
+              className="ii"
+              style={{ cursor: "pointer" }}
+              onClick={() => setMostraConfirmarSenha(!mostraConfirmarSenha)}
+            ></box-icon>
+          </div>
 
-        <button type="submit" className="btn" onClick={handleCadastrar}>
-          Cadastrar
-        </button>
+          <button type="submit" className="btn" onClick={handleCadastrar}>
+            Cadastrar
+          </button>
 
-        <div className="link-registro">
-          <p>
-            Já possui uma conta? <a href="../login">login</a>
-          </p>
-        </div>
-      </form>
+          <div className="link-registro">
+            <p>
+              Já possui uma conta? <a href="../login">login</a>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
