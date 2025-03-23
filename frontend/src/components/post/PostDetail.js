@@ -7,6 +7,7 @@ import "boxicons";
 
 const PostDetail = ({ post }) => {
   const [usuario, setUsuario] = useState(null);
+  const [qtdCurtidas, setQtdCurtidas] = useState(post.qtd_curtidas ? post.qtd_curtidas : 0);
   const router = useRouter();
 
   useEffect(() => {
@@ -63,10 +64,7 @@ const PostDetail = ({ post }) => {
         alignItems="center"
         mt={2}
       >
-        <BotaoLike post_id={post.id} usuario_id={usuario?.id} tipo="post" />
-        <Typography variant="body2" mr={1}>
-          {post.qtd_curtidas}
-        </Typography>
+        <BotaoLike post_id={post.id} usuario_id={usuario?.id} qtdCurtidas={post?.qtd_curtidas} tipo="post" />
         <Typography variant="body1" ml={65}>
           {new Date(post.dh_criacao).toLocaleString()}
         </Typography>

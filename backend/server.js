@@ -59,10 +59,6 @@ app.use("/usuarios", usuarioRoutes);
 app.use("/posts", postRoutes);
 app.use("/posts", comentarioRoutes);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
-
 app.listen(port, () => {
   console.log(`Documentação rodando em http://localhost:${port}/api-docs`);
 });
-
-
-export default app;

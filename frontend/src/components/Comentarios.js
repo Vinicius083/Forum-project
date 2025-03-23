@@ -3,7 +3,7 @@ import { Box, Typography, Avatar } from "@mui/material";
 import BotaoLike from "@/components/post/Like";
 import DeleteButton from "./post/DeleteButton";
 
-const Comentarios = ({ comentarios }) => {
+const Comentarios = ({ comentarios, setComentarios }) => {
   const [usuario, setUsuario] = useState(null);
 
   useEffect(() => {
@@ -51,6 +51,8 @@ const Comentarios = ({ comentarios }) => {
               <DeleteButton
                 post_id={comentario?.post_id}
                 comentario_id={comentario?.id}
+                comentarios={comentarios}
+                setComentarios={setComentarios}
               />
             )}
           </Box>

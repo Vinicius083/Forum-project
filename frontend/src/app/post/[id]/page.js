@@ -76,7 +76,7 @@ const PostPage = () => {
           usuario={usuario}
           onComentarioSubmit={handleComentarioSubmit}
         />
-        <Comentarios comentarios={comentarios} />
+        <Comentarios comentarios={comentarios} setComentarios={setComentarios} />
       </div>
     </div>
   );

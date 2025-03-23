@@ -13,7 +13,12 @@ import { deletarPost } from "@/services/postServices";
 import { deletarComentario } from "@/services/comentarioServices";
 import "boxicons";
 
-const DeleteButton = ({ post_id, comentario_id }) => {
+const DeleteButton = ({
+  post_id,
+  comentario_id,
+  comentarios,
+  setComentarios,
+}) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -33,7 +38,11 @@ const DeleteButton = ({ post_id, comentario_id }) => {
         router.push("/home");
       } else {
         await deletarComentario(post_id, comentario_id);
-        router.refresh;
+        setComentarios((prevComentarios) =>
+          prevComentarios.filter(
+            (comentario) => comentario.id !== comentario_id
+          )
+        );
       }
       handleClose();
     } catch (error) {
