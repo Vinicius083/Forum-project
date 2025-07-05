@@ -8,7 +8,7 @@ const Navbar = ({ avatar, apelido, nome }) => {
     <AppBar position="static">
       <Toolbar sx={{ backgroundColor: "#232328" }}>
         <Typography variant="h6" sx={{ flexGrow: 2 }} style={{ cursor: "pointer" }} onClick={() => {router.push("/home")}}>
-          Forum Project
+          Dialoga
         </Typography>
         <Box display="flex" alignItems="center" style={{ cursor: "pointer" }}>
           <Button variant="contained" color="primary" onClick={() => {router.push("/post/create")}} sx={{ marginRight: 2 }}>
